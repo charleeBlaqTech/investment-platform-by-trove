@@ -33,3 +33,17 @@ mvn spring-boot:run
 - Swagger UI:     http://localhost:8080/swagger-ui/index.html
 - Health Check:   http://localhost:8080/actuator/health
 ===============================================================================
+
+
+
+===============TO DROP THE DB ON DOCKER======
+docker stop trove_postgres && docker rm trove_postgres && docker run --name trove_postgres -e POSTGRES_DB=investment_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
+
+====TO BUILD UP THE SPRING SERVER AND DATABASE WITH DOCKER when code changes====
+docker compose up --build
+
+===start the docker server when no code change====
+docker compose up or docker compose up -d
+
+to stop server========
+docker compose logs -f

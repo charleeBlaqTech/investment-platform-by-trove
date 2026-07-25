@@ -23,7 +23,7 @@ public class TradeRequest {
     @Positive(message = "Quantity must be positive")
     private BigDecimal quantity;
 
-    @NotNull(message = "Execution price is required")
-    @Positive(message = "Execution price must be positive")
-    private BigDecimal price;
+//    @NotNull(message = "Execution price is required")
+//    @Positive(message = "Execution price must be positive")
+//    private BigDecimal price;
 }

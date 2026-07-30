@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -18,7 +17,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Transactional
 class GamificationControllerIntegrationTest {
 
     @Autowired
@@ -30,7 +28,7 @@ class GamificationControllerIntegrationTest {
     @Test
     @DisplayName("Integration Test: Create users and fetch leaderboard endpoint")
     void getLeaderboard_ReturnsOkAndUsers() throws Exception {
-        // 1. Create User A
+
         CreateUserRequest reqA = new CreateUserRequest();
         reqA.setUsername("user_alpha");
 
@@ -39,7 +37,6 @@ class GamificationControllerIntegrationTest {
                         .content(objectMapper.writeValueAsString(reqA)))
                 .andExpect(status().isCreated());
 
-        // 2. Fetch Leaderboard
         mockMvc.perform(get("/api/v1/gamification/leaderboard")
                         .param("limit", "10"))
                 .andExpect(status().isOk())

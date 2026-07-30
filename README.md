@@ -1,49 +1,101 @@
-===============================================================================
-       GAMIFIED TRADING PLATFORM — DOCKER & APPLICATION LIFECYCLE COMMANDS
-===============================================================================
+## Running the Application
 
--------------------------------------------------------------------------------
-1. STOPPING EVERYTHING (BEFORE LEAVING)
--------------------------------------------------------------------------------
-# Step A: Stop the Spring Boot App
-# Press Ctrl + C in the terminal window running the app.
+### Prerequisites
 
-# Step B: Stop the PostgreSQL Docker container
-docker stop trove_postgres
+Before running the application, ensure you have the following installed:
 
--------------------------------------------------------------------------------
-2. STARTING EVERYTHING (WHEN YOU RETURN)
--------------------------------------------------------------------------------
-# Step A: Start the PostgreSQL Docker container
-docker start trove_postgres
+- Java 21
+- Maven 3.9+
+- Docker Desktop (optional, for running with Docker)
 
-# Note: If the container was deleted/removed, recreate it with:
-# docker run --name trove_postgres -e POSTGRES_DB=investment_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
+---
 
-# Step B: Navigate to project root
-cd ~/IdeaProjects/investment-platform-By-Trove
+## Running with Docker
 
-# Step C: Run the Spring Boot application
-mvn spring-boot:run
+Clone the repository:
 
--------------------------------------------------------------------------------
-3. USEFUL VERIFICATION LINKS ONCE RUNNING
--------------------------------------------------------------------------------
-- API Base URL:   http://localhost:8080
-- Swagger UI:     http://localhost:8080/swagger-ui/index.html
-- Health Check:   http://localhost:8080/actuator/health
-===============================================================================
+```bash
+git clone <repository-url>
+cd investment-platform-By-Trove
+```
 
+Build and start the application:
 
-
-===============TO DROP THE DB ON DOCKER======
-docker stop trove_postgres && docker rm trove_postgres && docker run --name trove_postgres -e POSTGRES_DB=investment_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
-
-====TO BUILD UP THE SPRING SERVER AND DATABASE WITH DOCKER when code changes====
+```bash
 docker compose up --build
+```
 
-===start the docker server when no code change====
-docker compose up or docker compose up -d
+The application will be available at:
 
-to stop server========
-docker compose logs -f
+```
+http://localhost:8080
+```
+
+```bash
+mvn test
+```
+
+To stop the application:
+
+```bash
+docker compose down
+```
+
+---
+
+## Running Locally
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+cd investment-platform-By-Trove
+```
+
+Build the project:
+
+```bash
+mvn clean install
+```
+
+run build to confirm successful build
+```bash
+mvn clean package -DskipTests
+```
+
+Run the application:
+
+```bash
+mvn spring-boot:run
+```
+
+
+run tests
+```bash
+mvn test
+```
+
+Alternatively, if using IntelliJ IDEA:
+
+1. Open the project.
+2. Wait for Maven dependencies to download.
+3. Run the `Main` class.
+
+The application will start on:
+
+```
+http://localhost:8080
+```
+
+---
+
+## Data Storage
+
+This project currently uses an **in-memory repository** for persistence.
+
+- No PostgreSQL installation is required.
+- No database configuration is needed.
+- All data is stored in memory while the application is running.
+- Restarting the application clears all stored data since I used In memory.
+
+Database persistence (PostgreSQL) will be introduced in a future version of the project.

@@ -44,4 +44,4 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
         return userMapper.toResponse(user);
     }
-}
+};
